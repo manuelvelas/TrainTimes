@@ -1,102 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- Bootstrap CDN -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <title>MTA Times</title>
-</head>
-<body>
-    <div class="container">
-        <div class="wrapper">
 
-        
+<html lang="en-us">
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>Employee Tracker</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+  <!-- Firebase References -->
+  
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+     <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js"></script>
+
+  <!-- Moment.js Reference -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+
+  <style>
+    #employee-table th,
+    td {
+      display: inline-block;
+      width: 16.575%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Employee Tracker -->
+  <div class="container">
+
+    <!-- Jumbotron -->
+    <div class="jumbotron" style="background-color: black; color: white">
+      <h1 class="text-center">Employee Data Management</h1>
+      <h3 class="text-center">A Comprehensive Directory of Employee Billable Hours</h3>
     </div>
-        <div class="row">
-                <div class="col-sm-12">
-                        <div class="jumbotron">
-                                <h1>MTA Train Times</h1> 
-                                
-                         </div>
-                    
-                </div>
+
+    <div class="row">
+
+      <div class="col-md-12">
+
+        <!-- Current Employees-->
+        <div class="card mb-4">
+          <div class="card-header">Current Train Schedule</div>
+          <div class="card-body">
+            <table class="table table-sm table-hover" id='employee-table'>
+              <thead>
+                <tr>
+                  <th scope="col">Train Name</th>
+                  <th scope="col">Destination</th>
+                  <th scope="col">Frequency (min)</th>
+                  <th scope="col">Next Arrival</th>
+                  <th scope="col">Minutes Away</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div class="row">
-                <div class="col-sm-12">
-                    <h5>Current Train Schedule</h5>
-                </div>
-        </div>
-        <div class="row">
-                <div class="col-sm-12">
-        <table class="table">
-                <thead>
-                  <tr>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Email</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
-                  </tr>
-                  <tr>
-                    <td>Mary</td>
-                    <td>Moe</td>
-                    <td>mary@example.com</td>
-                  </tr>
-                  <tr>
-                    <td>July</td>
-                    <td>Dooley</td>
-                    <td>july@example.com</td>
-                  </tr>
-                </tbody>
-              </table>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <!-- Add Employee  -->
+        <div class="card mb-4">
+          <div class="card-header">Add Train</div>
+          <div class="card-body">
+
+            <!-- Entry Form -->
+            <form>
+              <div class="form-group">
+                <label for="employee-name-input">Train Name</label>
+                <input class="form-control" id="employee-name-input" placeholder="Train Name" type="text">
               </div>
+              <div class="form-group">
+                <label for="role-input">Destination</label>
+                <input class="form-control" id="role-input" placeholder="destination" type="text">
+              </div>
+              <div class="form-group">
+                <label for="start-input">First Train Time (HH:mm - military Times)</label>
+                <input class="form-control" id="start-input" placeholder="19:00" type="text">
+              </div>
+              <div class="form-group">
+                <label for="rate-input">Frequency (min)</label>
+                <input class="form-control" id="rate-input" placeholder="5" type="text">
+              </div>
+              <button class="btn btn-primary float-right" id="add-employee-btn">Submit</button>
+            </form>
+
+          </div>
         </div>
-        <div class="row">
-                <div class="col-sm-12">
-                </div>
-        </div>
-        <div class="row">
-                <div class="col-sm-12">
-                <h5>Add Train</h5>
-                <form action="/action_page.php">
-                    <div class="form-group">
-                            <label for="usr">Train Name</label>
-                            <input type="text" class="form-control" id="trainName">
-                          </div>
-                    <div class="form-group">
-                                <label for="usr">Destination</label>
-                                <input type="text" class="form-control" id="destination">
-                    </div>
-                    <div class="form-group">
-                            <label for="usr">First Train Time (HH:mm Military Time)</label>
-                            <input type="text" class="form-control" id="startTime">
-                    </div>
-                    <div class="form-group">
-                            <label for="usr">Frequency in Minutes</label>
-                            <input type="text" class="form-control" id="frequency">
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-                </div>
-        </div>
-                
-                
-                
-                
-                
-                
-                
-                
-                
+      </div>
     </div>
-        </div>
+
+  </div>
+
+  <!-- JavaScript -->
+  <script src="./assets/javascript/app.js"></script>
 
 </body>
+
 </html>
