@@ -4,9 +4,16 @@
       width: 16.575%;
     }
 .jumbotron{
-    background-image: url("/assets/images/nysubway.jpg");
+    background-image: url("https://www.nycgo.com/images/articles/8785/soc-nycsubway-7train-buglewicz__facebook.jpg");
     background-size: cover;
     background-position: center;
     height: 300px;
+    
+    
 
+}
+.text-center{
+    font-family: 'Anton', sans-serif;
+    font-size: 78px;
+    color: white;
 }
